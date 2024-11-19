@@ -18,6 +18,4 @@ echo "Sum: " .$sum;
 echo "<br>Highest  num: ".max($arr);
 echo "<br>Lowest  num: ".min($arr);
 
-
-
 ?>
