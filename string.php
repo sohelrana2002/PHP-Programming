@@ -12,13 +12,20 @@
     // ----------String Length----------
     // The PHP strlen() function returns the length of a string.
     $name = "MD SOHEL RANA";
-    echo strlen($name);
+    echo "Total string length: " .strlen($name);
 
     // ------------Word Count-------------
     // The PHP str_word_count() function counts the number of words in a string.
     echo "<br>";
     $institute = "Varendra University";
-    echo str_word_count($institute);
+    echo "Total word count: ".str_word_count($institute);
+
+    // -------PHP substr_count() Function--------
+    // Count the number of times occurs in the string:
+    echo "<br>";
+    echo "word count: " .substr_count($name, "A");
+
+
 
     // -------Search For Text Within a String-----------
     /* ----
@@ -27,8 +34,8 @@
         2. If a match is found, the function returns the character position of the first match. If no match is found, it will return FALSE
     ----*/
     echo "<br>";
-    echo strpos($name, "RANA");
-    echo "<br>" .strpos($name, "RISHI");//return false;
+    echo "character position: " .strpos($name, "RANA");
+    echo "<br>" ."character position: ".strpos($name, "RISHI");//return false;
 
 
     // ---------Upper Case--------
