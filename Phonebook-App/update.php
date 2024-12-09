@@ -14,7 +14,11 @@
 <?php
 session_start();
 require "connection.php";
-$getPhoneFromSession = isset($_SESSION['phone']) ? $_SESSION['phone']: "";
+$updatePhone = $_GET['specificPhone'];
+$getPhoneFromSession = $_SESSION['phone'];
+$update_query = "SELECT * FROM addcontact WHERE phone = '$updatePhone'";
+$update_res = mysqli_query($conn, $update_query);
+$update_row = mysqli_fetch_array($update_res);
 
 // echo "$getPhoneFromSession";
 
@@ -89,22 +93,21 @@ if (isset($_POST["addcontact"])) {
     }
 
 
-    $registerMessage = "";
+    $updateMessage = "";
     // ----check if there is no error in input --
     if (!$nameError && !$phoneError && !$emailError && !$dateError && !$addressError && !$professionError) {
-        $query = "INSERT INTO addcontact(name, phone, email, date, profession, address, refphone) VALUES ('$name', '$phone', '$email', '$date', '$profession', '$address', '$refPhone')";
+        $query = "UPDATE addcontact SET name = '$name', phone = '$phone', email = '$email', date = '$date', profession = '$profession', address = '$address' WHERE phone = '$updatePhone'";
 
         $res = mysqli_query($conn, $query);
 
         if ($res) {
-            $registerMessage = "Registration successfully!";
+            $updateMessage = "Update successfully!";
         } else {
-           $registerMessage = "Registration failed!";
+            $updateMessage = "Update failed!";
         }
     }
 
 }
-
 
 ?>
 
@@ -114,15 +117,7 @@ if (isset($_POST["addcontact"])) {
     <!-- ----navbar----  -->
     <?php require "navbar.html" ?>
 
-    <?php if($getPhoneFromSession == ""){?>
-        <div class="container">
-            <div class="check__login">
-                <h2 class="heading">At first Login your account then add contact</h2>
-            </div>
-        </div>
-    <?php }else{ ?>
-
-    <!-- ---content ---  -->
+    <!-- ----content---  -->
     <div class="container">
         <div class="registration__container">
             <form method="POST" class="form">
@@ -131,14 +126,14 @@ if (isset($_POST["addcontact"])) {
                 <div class="form__box">
                     <!-- ---name---  -->
                     <input type="text" placeholder="Enter Name" name="name"
-                        value="<?php echo isset($name) ? $name : "" ?>">
+                        value="<?php echo $update_row['name'] ? $update_row['name'] : "" ?>">
 
                     <!-- ---name error--- -->
                     <p class="text"><?php echo isset($nameError) ? $nameError : "" ?></p>
 
                     <!-- ---phone ---  -->
                     <input type="number" placeholder="Enter Phone Number" name="phone"
-                        value="<?php echo isset($phone) ? $phone : "" ?>">
+                        value="<?php echo $update_row['phone'] ? $update_row['phone'] : "" ?>">
 
                     <!-- ---phone error---  -->
                     <p class="text"><?php echo isset($phoneError) ? $phoneError : "" ?></p>
@@ -146,40 +141,38 @@ if (isset($_POST["addcontact"])) {
 
                     <!----email ---  -->
                     <input type="email" placeholder="Enter Your Email" name="email"
-                        value="<?php echo isset($email) ? $email : "" ?>">
+                        value="<?php echo $update_row['email'] ? $update_row['email'] : "" ?>">
                     <!-- ----email errror  ---  -->
                     <p class="text"><?php echo isset($emailError) ? $emailError : "" ?></p>
 
                     <!----date ---  -->
                     <input type="date" placeholder="Bithday" name="date"
-                        value="<?php echo isset($date) ? $date : "" ?>">
+                        value="<?php echo $update_row['date'] ? $update_row['date'] : "" ?>">
 
                     <!-- ----date errror  ---  -->
                     <p class="text"><?php echo isset($dateError) ? $dateError : "" ?></p>
 
                     <!----profession ---  -->
                     <input type="text" placeholder="Enter profession" name="profession"
-                        value="<?php echo isset($profession) ? $profession : "" ?>">
+                        value="<?php echo $update_row['profession'] ? $update_row['profession'] : "" ?>">
 
                     <!-- ----profession errror  ---  -->
                     <p class="text"><?php echo isset($professionError) ? $professionError : "" ?></p>
 
                     <!-- ---address --  -->
                     <input type="text" placeholder="Enter address" name="address"
-                        value="<?php echo isset($address) ? $address : "" ?>">
+                        value="<?php echo $update_row['address'] ? $update_row['address'] : "" ?>">
 
                     <!-- ----address errror  ---  -->
                     <p class="text"><?php echo isset($addressError) ? $addressError : "" ?></p>
-
                 </div>
-                 <!-- ----update Message  ---  -->
-                 <p class="text"><?php echo isset($registerMessage) ? $registerMessage : "" ?></p>
 
+                 <!-- ----update Message  ---  -->
+                 <p class="text"><?php echo isset($updateMessage) ? $updateMessage : "" ?></p>
                 <button type="submit" name="addcontact" class="btn">Submit</button>
             </form>
         </div>
     </div>
-    <?php } ?>
 </body>
 
 </html>

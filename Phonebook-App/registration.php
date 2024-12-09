@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 
 <!-- -----php cod----  -->
@@ -58,6 +58,7 @@ if (isset($_POST["registration"])) {
         $password = $_POST["password"];
     }
 
+    $registrationMessage = "";
     // ----check if there is no error in input --
     if(!$nameError && !$phoneError && !$emailError && !$passwordError){
         $query = "INSERT INTO registration(name, phone, email, password) VALUES ('$name', '$phone', '$email', '$password')";
@@ -65,13 +66,11 @@ if (isset($_POST["registration"])) {
         $res = mysqli_query($conn, $query);
 
         if($res){
-            echo "Registration successfully!";
+           $registrationMessage = "Registration successfully!";
         }else{
-            echo "Registration failed!";
+           $registrationMessage = "Registration failed!";
         }
     }
-
-
 
 }
 
@@ -82,32 +81,9 @@ if (isset($_POST["registration"])) {
 <body>
 
     <!-- ----navbar----  -->
-    <nav class="navbar">
-        <div class="navbar__container">
-            <a href="index.html" class="logo">
-                <p>PhoneBook</p>
-            </a>
+    <?php require "navbar.html" ?>
 
-            <ul class="menu">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a href="registration.php">Registration</a>
-                </li>
-                <li>
-                    <a href="addcontact.html">Add Contact</a>
-                </li>
-                <li>
-                    <a href="login.php">Login</a>
-                </li>
-                <li>
-                    <a href="logout.html">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <!-- ---content  =----  -->
     <div class="container">
         <div class="registration__container">
             <form method="POST" class="form">
@@ -140,6 +116,9 @@ if (isset($_POST["registration"])) {
                     <!-- ---password error---  -->
                     <p class="text"><?php echo isset($passwordError) ? $passwordError : "" ?></p>
                 </div>
+
+                <!-- ----update Message  ---  -->
+                <p class="text"><?php echo isset($registrationMessage) ? $registrationMessage : "" ?></p>
 
                 <button type="submit" name="registration" class="btn">Submit</button>
             </form>

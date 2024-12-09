@@ -2,8 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: none;
-    outline: none;
     text-decoration: none;
     list-style-type: none;
 }
@@ -15,6 +13,10 @@
 html{
     font-size: 62.5%;
     overflow-x: hidden;
+}
+button, input, a{
+    border: none;
+    outline: none;
 }
 
 .container{
@@ -102,3 +104,52 @@ html{
     background-color: red;
     text-align: center;
 }
+
+
+
+
+/* -----home---  */
+.table__container{
+    padding-top: 7rem;
+    width: 80%;
+    /* height: 80vh; */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    margin: 0 auto;
+}
+.contact__info{
+    padding: 2rem;
+    border-radius: 5px;
+    gap: 1rem;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+.contact__info th, td {
+    padding: 1rem;
+    border: 1px solid gray;
+}
+.contact__info th{
+    font-size: 1.7rem;
+}
+.contact__info td{
+    font-size: 1.6rem;
+}
+.contact__info td:not(.email){
+    text-transform: capitalize;
+}
+
+
+
+/* -delete page ---  */
+.delete__container,
+.check__login{
+    width: 100%;
+    height: 80vb;
+    display: grid;
+    place-items: center;
+}
+
+
+/* ---check__login---  */

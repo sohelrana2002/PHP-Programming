@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 
 <!-- -----php code----  -->
@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
         $loginMessage = "Login successfully";
 
         $_SESSION['color'] = "red";
-        header("Refresh: 1; url=index.html");
+        header("Refresh: 1; url=index.php");
         
         // ---get phone and create it as session variable--- 
         $getPhone = mysqli_fetch_array($res);
@@ -47,32 +47,9 @@ if (isset($_POST['login'])) {
 <body>
 
     <!-- ----navbar----  -->
-    <nav class="navbar">
-        <div class="navbar__container">
-            <a href="index.html" class="logo">
-                <p>PhoneBook</p>
-            </a>
+    <?php require "navbar.html" ?>
 
-            <ul class="menu">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a href="registration.php">Registration</a>
-                </li>
-                <li>
-                    <a href="addcontact.html">Add Contact</a>
-                </li>
-                <li>
-                    <a href="login.php">Login</a>
-                </li>
-                <li>
-                    <a href="logout.html">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <!-- ----- content ----  -->
     <!-- session checking  -->
     <!-- style="background : <?php echo $_SESSION['color'] ?>" -->
 
