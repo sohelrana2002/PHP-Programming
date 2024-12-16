@@ -121,7 +121,7 @@ if (isset($_POST["addcontact"])) {
     <div class="container">
         <div class="registration__container">
             <form method="POST" class="form">
-                <h2 class="heading">Add New Contact</h2>
+                <h2 class="heading">Update Contact</h2>
 
                 <div class="form__box">
                     <!-- ---name---  -->
